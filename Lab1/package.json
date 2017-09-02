@@ -9,6 +9,9 @@
   "author": "Bradford Smith",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "guid": "0.0.12",
+    "mongodb": "^2.2.31"
   }
 }
