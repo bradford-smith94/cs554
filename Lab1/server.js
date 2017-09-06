@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true })); //for parsing application/x-
  * HTTP verb they are using.
  */
 app.use(function(request, response, next) {
-    console.log("HTTP " + request.method + " request for " + request.originalUrl + " with body: " + request.body);
+    console.log("Received HTTP " + request.method + " request for: " +
+        request.originalUrl + " with body: " + JSON.stringify(request.body));
     next();
 });
 
