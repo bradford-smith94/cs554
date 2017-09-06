@@ -1,6 +1,6 @@
 /* Bradford Smith
  * CS 554 Lab 1 dbStartup.js
- * 09/05/2017
+ * 09/06/2017
  */
 
 var MongoClient = require('mongodb').MongoClient,
@@ -17,7 +17,7 @@ function runSetup() {
 
             return todoCollection.count().then(function(theCount) {
                 if (theCount > 0) {
-                    return todoCollection.find.toArray();
+                    return todoCollection.find().toArray();
                 }
             });
         });

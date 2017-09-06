@@ -1,6 +1,6 @@
 /* Bradford Smith
  * CS 554 Lab 1 data.js
- * 09/05/2017
+ * 09/06/2017
  */
 
 var MongoClient = require('mongodb').MongoClient,
@@ -55,6 +55,15 @@ MongoClient.connect(fullMongoUrl)
         };
 
         //create todo item
-        exports.createTodo = function() {
+        exports.createTodo = function(title, description, hoursEstimated) {
+            if (!title) Promise.reject("Title is required!");
+            if (!description) Promise.reject("Description is required!");
+            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) Promise.reject("Invalid value for hoursEstimated!");
+
+            return todoCollection.insertOne({ _id: Guid.create().toString(), title: title, description: description, hoursEstimated: hoursEstimated, completed: false, comments: [] }).then(function(newDoc) {
+                return newDoc.insertedId;
+            }).then(function(newId) {
+                return exports.getTodo(newId);
+            });
         };
     });

@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 1 server.js
- * 09/05/2017
+ * 09/06/2017
  */
 
 var express = require('express');
@@ -52,12 +52,12 @@ app.get("/api/tasks", function (request, response) {
         }
         if (request.query.take) {
             if (request.query.take > 100) {
-                end = start + 100;
+                end = 100;
             } else {
-                end = start + request.query.take;
+                end = request.query.take;
             }
         }
-        response.json(todoList.slice(start, end));
+        response.json(todoList.slice(start).slice(0, end));
     });
 });
 
@@ -69,6 +69,8 @@ app.get("/api/tasks", function (request, response) {
 app.get("/api/tasks/:id", function (request, response) {
     data.getTodo(request.params.id).then(function(todo) {
         response.json(todo);
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
     });
 });
 
@@ -79,7 +81,12 @@ app.get("/api/tasks/:id", function (request, response) {
  * request if not all details are supplied.
  */
 app.post("/api/tasks", function (request, response) {
-    //TODO
+    todo = request.body;
+    data.createTodo(todo.title, todo.description, todo.hoursEstimated).then(function(newTodo) {
+        response.json(newTodo);
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
+    });
 });
 
 /**
