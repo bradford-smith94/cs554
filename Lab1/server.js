@@ -28,8 +28,14 @@ app.use(function(request, response, next) {
  * Keep track of how many times a particular URL has been requested, updating
  * and logging with each request.
  */
+var UrlCount = {}
 app.use(function(request, response, next) {
-    //TODO
+    if (UrlCount[request.originalUrl]) {
+        UrlCount[request.originalUrl]++;
+    } else {
+        UrlCount[request.originalUrl] = 1;
+    }
+    console.log("That's " + UrlCount[request.originalUrl] + " request(s) for: " + request.originalUrl);
     next();
 });
 
