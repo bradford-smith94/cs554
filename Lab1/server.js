@@ -5,7 +5,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var data = require('./data.ja');
+var data = require('./data.js');
 
 var app = express();
 
@@ -44,7 +44,21 @@ app.use(function(request, response, next) {
  * it will show 100 tasks.
  */
 app.get("/api/tasks", function (request, response) {
-    //TODO
+    data.getAllTodos().then(function(todoList) {
+        let start = 0;
+        let end = 20;
+        if (request.query.skip) {
+            start = request.query.skip
+        }
+        if (request.query.take) {
+            if (request.query.take > 100) {
+                end = start + 100;
+            } else {
+                end = start + request.query.take;
+            }
+        }
+        response.json(todoList.slice(start, end));
+    });
 });
 
 /**
@@ -53,7 +67,9 @@ app.get("/api/tasks", function (request, response) {
  * Shows the task with the supplied ID.
  */
 app.get("/api/tasks/:id", function (request, response) {
-    //TODO
+    data.getTodo(request.params.id).then(function(todo) {
+        response.json(todo);
+    });
 });
 
 /**
@@ -106,4 +122,8 @@ app.post("/api/tasks/:id/comments", function (request, response) {
  */
 app.delete("api/tasks/:taskId/:commentId", function (request, response) {
     //TODO
+});
+
+app.listen(3000, function() {
+    console.log("Server is now listening on port 3000.");
 });

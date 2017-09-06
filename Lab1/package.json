@@ -13,5 +13,12 @@
     "express": "^4.15.4",
     "guid": "0.0.12",
     "mongodb": "^2.2.31"
+  },
+  "eslintConfig": {
+      "env": {
+          "browser": true,
+          "node": true,
+          "es6": true
+      }
   }
 }
