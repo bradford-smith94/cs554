@@ -104,7 +104,12 @@ app.post("/api/tasks", function (request, response) {
  * cannot manipulate comments in this route!
  */
 app.put("/api/tasks/:id", function (request, response) {
-    //TODO
+    todo = request.body;
+    data.updateTodo(request.params.id, todo.title, todo.description, todo.hoursEstimated, todo.completed).then(function(updatedTodo) {
+        response.json(updatedTodo);
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
+    });
 });
 
 /**
@@ -115,7 +120,12 @@ app.put("/api/tasks/:id", function (request, response) {
  * you cannot manipulate comments in this route!
  */
 app.patch("/api/tasks/:id", function (request, response) {
-    //TODO
+    todo = request.body;
+    data.updateTodoPartial(request.params.id, todo.title, todo.description, todo.hoursEstimated, todo.completed).then(function(updatedTodo) {
+        response.json(updatedTodo);
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
+    });
 });
 
 /**

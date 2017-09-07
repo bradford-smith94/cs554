@@ -66,4 +66,30 @@ MongoClient.connect(fullMongoUrl)
                 return exports.getTodo(newId);
             });
         };
+
+        //update todo item
+        exports.updateTodo = function(id, title, description, hoursEstimated, completed) {
+            if (!id) return Promise.reject("You need to provide an ID");
+            if (!title) return Promise.reject("Title is required!");
+            if (!description) return Promise.reject("Description is required!");
+            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
+            if (completed == null || completed === undefined || !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
+
+            //use $set so we don't have to do extra work to preseve the comments
+            return todoCollection.updateOne({ _id: id }, { $set: { title: title, description: description, hoursEstimated: hoursEstimated, completed: completed }}).then(function() {
+                return exports.getTodo(id);
+            });
+        };
+
+        exports.updateTodoPartial = function(id, title, description, hoursEstimated, completed) {
+            if (!id) return Promise.reject("You need to provide an ID");
+            if (!title && !description && !hoursEstimated && !completed) return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
+            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
+            if (completed == null || completed === undefined || !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
+
+            //TODO: make sure partial updates work fine
+            return todoCollection.updateOne({ _id: id }, { $set: { title: title, description: description, hoursEstimated: hoursEstimated, completed: completed }}).then(function() {
+                return exports.getTodo(id);
+            });
+        };
     });
