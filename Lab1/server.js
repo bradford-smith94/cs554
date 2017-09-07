@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 1 server.js
- * 09/06/2017
+ * 09/07/2017
  */
 
 var express = require('express');
@@ -135,7 +135,11 @@ app.patch("/api/tasks/:id", function (request, response) {
  * supplied.
  */
 app.post("/api/tasks/:id/comments", function (request, response) {
-    //TODO
+    data.createComment(request.params.id, request.body.name, request.body.comment).then(function(updatedTodo) {
+        response.json(updatedTodo);
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
+    });
 });
 
 /**
@@ -144,8 +148,12 @@ app.post("/api/tasks/:id/comments", function (request, response) {
  * Deletes the comment with an id of `commentId` on the task with an id of
  * `taskId`.
  */
-app.delete("api/tasks/:taskId/:commentId", function (request, response) {
-    //TODO
+app.delete("/api/tasks/:taskId/:commentId", function (request, response) {
+    data.deleteComment(request.params.taskId, request.params.commentId).then(function() {
+        response.json({ success: true });
+    }, function(errorMessage) {
+        response.status(500).json({ error: errorMessage });
+    });
 });
 
 /**

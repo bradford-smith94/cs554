@@ -1,6 +1,6 @@
 /* Bradford Smith
  * CS 554 Lab 1 data.js
- * 09/06/2017
+ * 09/07/2017
  */
 
 var MongoClient = require('mongodb').MongoClient,
@@ -81,6 +81,7 @@ MongoClient.connect(fullMongoUrl)
             });
         };
 
+        //partially update todo item
         exports.updateTodoPartial = function(id, title, description, hoursEstimated, completed) {
             if (!id) return Promise.reject("You need to provide an ID");
             if (!title && !description && !hoursEstimated && !completed) return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
@@ -90,6 +91,33 @@ MongoClient.connect(fullMongoUrl)
             //TODO: make sure partial updates work fine
             return todoCollection.updateOne({ _id: id }, { $set: { title: title, description: description, hoursEstimated: hoursEstimated, completed: completed }}).then(function() {
                 return exports.getTodo(id);
+            });
+        };
+
+        //create comment
+        exports.createComment = function(id, name, comment) {
+            if (!id) return Promise.reject("You need to provide an ID");
+            if (!name) return Promise.reject("Name is required!");
+            if (!comment) return Promise.reject("Comment is required!");
+
+            newComment = {
+                "id": Guid.raw(),
+                "name": name,
+                "comment": comment
+            };
+
+            return todoCollection.updateOne({ _id: id }, { $push: { comments: newComment }}).then(function() {
+                return exports.getTodo(id);
+            });
+        };
+
+        //delete comment
+        exports.deleteComment = function(id, commentId) {
+            if (!id) return Promise.reject("You need to provide an ID");
+            if (!commentId) return Promise.reject("You need to provide a comment ID");
+
+            return todoCollection.updateOne({ _id: id }, { $pull: { comments: { id: commentId }}}).then(function() {
+                return true
             });
         };
     });
