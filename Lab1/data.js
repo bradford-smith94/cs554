@@ -58,7 +58,7 @@ MongoClient.connect(fullMongoUrl)
         exports.createTodo = function(title, description, hoursEstimated) {
             if (!title) return Promise.reject("Title is required!");
             if (!description) return Promise.reject("Description is required!");
-            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
+            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0 || !(typeof(hoursEstimated) === "number")) return Promise.reject("Invalid value for hoursEstimated!");
 
             return todoCollection.insertOne({ _id: Guid.create().toString(), title: title, description: description, hoursEstimated: hoursEstimated, completed: false, comments: [] }).then(function(newDoc) {
                 return newDoc.insertedId;
@@ -84,12 +84,17 @@ MongoClient.connect(fullMongoUrl)
         //partially update todo item
         exports.updateTodoPartial = function(id, title, description, hoursEstimated, completed) {
             if (!id) return Promise.reject("You need to provide an ID");
-            if (!title && !description && !hoursEstimated && !completed) return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
-            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
-            if (completed == null || completed === undefined || !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
+            if (!title && !description && !hoursEstimated && (completed == null || completed === undefined)) return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
+            if (hoursEstimated != null && hoursEstimated !== undefined && hoursEstimated <= 0 || !(typeof(hoursEstimated) === "number")) return Promise.reject("Invalid value for hoursEstimated!");
+            if (completed != null && completed !== undefined && !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
 
-            //TODO: make sure partial updates work fine
-            return todoCollection.updateOne({ _id: id }, { $set: { title: title, description: description, hoursEstimated: hoursEstimated, completed: completed }}).then(function() {
+            let updateObject = {}
+            if (title) updateObject["title"] = title;
+            if (description) updateObject["description"] = description;
+            if (hoursEstimated) updateObject["hoursEstimated"] = hoursEstimated;
+            if (completed != null && completed !== undefined) updateObject["completed"] = completed;
+
+            return todoCollection.updateOne({ _id: id }, { $set: updateObject}).then(function() {
                 return exports.getTodo(id);
             });
         };
