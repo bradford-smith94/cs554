@@ -38,14 +38,24 @@ MongoClient.connect(fullMongoUrl)
     .then(function(db) {
         var todoCollection = db.collection("todos");
 
-        //get all todo items
+        /**
+         * getAllTodos()
+         *
+         * Return list of all todo items in the collection
+         */
         exports.getAllTodos = function() {
             return todoCollection.find().toArray();
         };
 
-        //get todo by id
+        /**
+         * getTodo(id)
+         *
+         * Return a todo item by given id
+         */
         exports.getTodo = function(id) {
-            if (!id) return Promise.reject("You need to provide an ID");
+            if (id == null || id === undefined) return Promise.reject("You must provide id!");
+
+            if (typeof(id) !== "string") return Promise.reject("Invalid value for id!");
 
             return todoCollection.find({ _id: id }).limit(1).toArray().then(function(listOfTodos) {
                 if (listOfTodos.length === 0) throw "Could not find todo with id of " + id;
@@ -54,11 +64,23 @@ MongoClient.connect(fullMongoUrl)
             });
         };
 
-        //create todo item
+        /**
+         * createTodo(title, description, hoursEstimated)
+         *
+         * Create a new todo item with given title, description and
+         * hoursEstimated. Initial completed status will be false, comments will
+         * be empty and an id will be generated.
+         *
+         * Return the new todo item.
+         */
         exports.createTodo = function(title, description, hoursEstimated) {
-            if (!title) return Promise.reject("Title is required!");
-            if (!description) return Promise.reject("Description is required!");
-            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0 || !(typeof(hoursEstimated) === "number")) return Promise.reject("Invalid value for hoursEstimated!");
+            if (title == null || title === undefined) return Promise.reject("You must provide title!");
+            if (description == null || description === undefined) return Promise.reject("You must provide description!");
+            if (hoursEstimated == null || hoursEstimated === undefined) return Promise.reject("You must provide hoursEstimated!");
+
+            if (typeof(title) !== "string") return Promise.reject("Invalid value for title!");
+            if (typeof(description) !== "string") return Promise.reject("Invalid value for description!");
+            if (hoursEstimated <= 0 || typeof(hoursEstimated) !== "number") return Promise.reject("Invalid value for hoursEstimated!");
 
             return todoCollection.insertOne({ _id: Guid.create().toString(), title: title, description: description, hoursEstimated: hoursEstimated, completed: false, comments: [] }).then(function(newDoc) {
                 return newDoc.insertedId;
@@ -67,13 +89,26 @@ MongoClient.connect(fullMongoUrl)
             });
         };
 
-        //update todo item
+        /**
+         * updateTodo(id, title, description, hoursEstimated, completed)
+         *
+         * Update todo item by given id with given title, description,
+         * hoursEstimated and completed. Comments will be unchanged.
+         *
+         * Return the updated todo item.
+         */
         exports.updateTodo = function(id, title, description, hoursEstimated, completed) {
-            if (!id) return Promise.reject("You need to provide an ID");
-            if (!title) return Promise.reject("Title is required!");
-            if (!description) return Promise.reject("Description is required!");
-            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
-            if (completed == null || completed === undefined || !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
+            if (id == null || id === undefined) return Promise.reject("You must provide id!");
+            if (title == null || title === undefined) return Promise.reject("You must provide title!");
+            if (description == null || description === undefined) return Promise.reject("You must provide description!");
+            if (hoursEstimated == null || hoursEstimated === undefined) return Promise.reject("You must provide hoursEstimated!");
+            if (completed == null || completed === undefined) return Promise.reject("You must provide completed!");
+
+            if (typeof(id) !== "string") return Promise.reject("Invalid value for id!");
+            if (typeof(title) !== "string") return Promise.reject("Invalid value for title!");
+            if (typeof(description) !== "string") return Promise.reject("Invalid value for description!");
+            if (hoursEstimated <= 0 || typeof(hoursEstimated) != "number") return Promise.reject("Invalid value for hoursEstimated!");
+            if (typeof(completed) !== "boolean") return Promise.reject("Invalid value for completed status!");
 
             //use $set so we don't have to do extra work to preseve the comments
             return todoCollection.updateOne({ _id: id }, { $set: { title: title, description: description, hoursEstimated: hoursEstimated, completed: completed }}).then(function() {
@@ -81,46 +116,87 @@ MongoClient.connect(fullMongoUrl)
             });
         };
 
-        //partially update todo item
+        /**
+         * updateTodoPartial(id, title, description, hoursEstimated, completed)
+         *
+         * Update todo item by given id. Other parameters are optional with the
+         * exception that at least one must be present. Otherwise the same as
+         * 'updateTodo()'.
+         *
+         * Return the updated todo item.
+         */
         exports.updateTodoPartial = function(id, title, description, hoursEstimated, completed) {
-            if (!id) return Promise.reject("You need to provide an ID");
-            if (!title && !description && !hoursEstimated && (completed == null || completed === undefined)) return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
-            if (hoursEstimated != null && hoursEstimated !== undefined && hoursEstimated <= 0 || !(typeof(hoursEstimated) === "number")) return Promise.reject("Invalid value for hoursEstimated!");
-            if (completed != null && completed !== undefined && !(typeof(completed) === "boolean")) return Promise.reject("Invalid value for completed status!");
+            if (id == null || id === undefined) return Promise.reject("You must provide id!");
 
+            if ((title == null || title === undefined) &&
+                (description == null || description === undefined) &&
+                (hoursEstimated == null || hoursEstimated === undefined) &&
+                (completed == null || completed === undefined)) {
+                return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
+            }
+
+            if (hoursEstimated <= 0 || typeof(hoursEstimated) !== "number") return Promise.reject("Invalid value for hoursEstimated!");
+            if (typeof(completed) !== "boolean") return Promise.reject("Invalid value for completed status!");
+
+            //setup an object for what fields are to be updated
             let updateObject = {}
             if (title) updateObject["title"] = title;
             if (description) updateObject["description"] = description;
             if (hoursEstimated) updateObject["hoursEstimated"] = hoursEstimated;
             if (completed != null && completed !== undefined) updateObject["completed"] = completed;
 
+            //use $set to do a partial update on the updateObject
             return todoCollection.updateOne({ _id: id }, { $set: updateObject}).then(function() {
                 return exports.getTodo(id);
             });
         };
 
-        //create comment
+        /**
+         * createComment(id, name, comment)
+         *
+         * Add a comment to the todo item of the given id with the given name
+         * and comment. An id will be generated for the comment.
+         *
+         * Return the updated todo item.
+         */
         exports.createComment = function(id, name, comment) {
-            if (!id) return Promise.reject("You need to provide an ID");
-            if (!name) return Promise.reject("Name is required!");
-            if (!comment) return Promise.reject("Comment is required!");
+            if (id == null || id === undefined) return Promise.reject("You must provide id!");
+            if (name == null || name === undefined) return Promise.reject("You must provide name!");
+            if (comment == null || comment === undefined) return Promise.reject("You must provide comment!");
 
+            if (typeof(id) !== "string") return Promise.reject("Invalid value for id!");
+            if (typeof(title) !== "string") return Promise.reject("Invalid value for title!");
+            if (typeof(comment) !== "string") return Promise.reject("Invalid value for comment!");
+
+            //create an object to hold the comment
             newComment = {
                 "id": Guid.raw(),
                 "name": name,
                 "comment": comment
             };
 
+            //$push the newComment object onto the list of comments
             return todoCollection.updateOne({ _id: id }, { $push: { comments: newComment }}).then(function() {
                 return exports.getTodo(id);
             });
         };
 
-        //delete comment
+        /**
+         * deleteComment(id, commentId)
+         *
+         * Remove the comment matching commentId from the todo item of the given
+         * id.
+         *
+         * Return true.
+         */
         exports.deleteComment = function(id, commentId) {
-            if (!id) return Promise.reject("You need to provide an ID");
-            if (!commentId) return Promise.reject("You need to provide a comment ID");
+            if (id == null || id === undefined) return Promise.reject("You must provide id!");
+            if (commentId == null || commentId === undefined) return Promise.reject("You must provide commentId!");
 
+            if (typeof(id) !== "string") return Promise.reject("Invalid value for id!");
+            if (typeof(commentId) !== "string") return Promise.reject("Invalid value for commentId!");
+
+            //$pull out comments with 'id: commentId'
             return todoCollection.updateOne({ _id: id }, { $pull: { comments: { id: commentId }}}).then(function() {
                 return true
             });
