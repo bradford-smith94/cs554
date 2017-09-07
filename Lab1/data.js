@@ -56,9 +56,9 @@ MongoClient.connect(fullMongoUrl)
 
         //create todo item
         exports.createTodo = function(title, description, hoursEstimated) {
-            if (!title) Promise.reject("Title is required!");
-            if (!description) Promise.reject("Description is required!");
-            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) Promise.reject("Invalid value for hoursEstimated!");
+            if (!title) return Promise.reject("Title is required!");
+            if (!description) return Promise.reject("Description is required!");
+            if (hoursEstimated == null || hoursEstimated === undefined || hoursEstimated <= 0) return Promise.reject("Invalid value for hoursEstimated!");
 
             return todoCollection.insertOne({ _id: Guid.create().toString(), title: title, description: description, hoursEstimated: hoursEstimated, completed: false, comments: [] }).then(function(newDoc) {
                 return newDoc.insertedId;

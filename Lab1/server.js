@@ -138,6 +138,13 @@ app.delete("api/tasks/:taskId/:commentId", function (request, response) {
     //TODO
 });
 
+/**
+ * Catch anything else and give a 404
+ */
+app.use("*", function (request, response) {
+    response.status(404).json({ error: "Not found" });
+});
+
 app.listen(3000, function() {
     console.log("Server is now listening on port 3000.");
 });
