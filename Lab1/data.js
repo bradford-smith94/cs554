@@ -135,8 +135,14 @@ MongoClient.connect(fullMongoUrl)
                 return Promise.reject("You must provide at least one of: title, description, hoursEstimated or completed!");
             }
 
-            if (hoursEstimated <= 0 || typeof(hoursEstimated) !== "number") return Promise.reject("Invalid value for hoursEstimated!");
-            if (typeof(completed) !== "boolean") return Promise.reject("Invalid value for completed status!");
+            if ((hoursEstimated != null && hoursEstimated !== undefined) &&
+                (hoursEstimated <= 0 || typeof(hoursEstimated) !== "number")) {
+                return Promise.reject("Invalid value for hoursEstimated!");
+            }
+            if ((completed != null && completed !== undefined) &&
+                typeof(completed) !== "boolean") {
+                return Promise.reject("Invalid value for completed status!");
+            }
 
             //setup an object for what fields are to be updated
             let updateObject = {}
@@ -165,7 +171,7 @@ MongoClient.connect(fullMongoUrl)
             if (comment == null || comment === undefined) return Promise.reject("You must provide comment!");
 
             if (typeof(id) !== "string") return Promise.reject("Invalid value for id!");
-            if (typeof(title) !== "string") return Promise.reject("Invalid value for title!");
+            if (typeof(name) !== "string") return Promise.reject("Invalid value for name!");
             if (typeof(comment) !== "string") return Promise.reject("Invalid value for comment!");
 
             //create an object to hold the comment

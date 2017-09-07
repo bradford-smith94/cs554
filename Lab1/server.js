@@ -100,8 +100,8 @@ app.post("/api/tasks", function (request, response) {
  * PUT /api/tasks/:id
  *
  * Updates the task with the supplied ID and returns the new task object;
- * **task**: PUT calls must provide deltas of the value to update! **Note** you
- * cannot manipulate comments in this route!
+ * **task**: PUT calls must provide all details of the new state of the object!
+ * **Note** you cannot manipulate comments in this route!
  */
 app.put("/api/tasks/:id", function (request, response) {
     todo = request.body;
