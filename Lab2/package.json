@@ -1,0 +1,22 @@
+{
+  "name": "bsmith8-cs554-lab2",
+  "version": "1.0.0",
+  "description": "CS 554 Lab 2 submission by Bradford Smith",
+  "main": "server.js",
+  "scripts": {
+    "test": "exit 1"
+  },
+  "author": "Bradford Smith",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    }
+  }
+}
