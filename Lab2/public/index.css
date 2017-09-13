@@ -1,3 +1,8 @@
+/* Bradford Smith (bsmith8)
+ * CS 554 Lab 2 index.css
+ * 09/13/2017
+ */
+
 #container {
     display: flex;
     flex-direction: row;
@@ -8,20 +13,30 @@
     max-width: 800px;
 }
 
+/* Limit image size */
 .banner {
     width: 100%;
     max-width: 200px;
 }
 
+/* Smallest screen: one column */
 @media  screen and (max-width: 500px) {
     #container > article {
         flex: 0 1 100%;
     }
 }
+
+/* Medium screen: two columns, side nav */
 @media  screen and (min-width: 501px) {
+    /* For lining up items in rows nicely, as not all their descriptions are
+     * the same length.
+     */
+    article {
+        min-height: 600px;
+    }
+
     nav {
         float: left;
-        display: inline;
         width: 25%;
     }
 
@@ -37,6 +52,8 @@
         flex: 0 1 50%;
     }
 }
+
+/* Largest screen: three columns */
 @media  screen and (min-width: 801px) {
     #container > article {
         flex: 0 1 33%;
