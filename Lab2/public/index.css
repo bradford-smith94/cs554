@@ -25,6 +25,10 @@
         width: 25%;
     }
 
+    nav > * {
+        display: block
+    }
+
     #container {
         width: 50%;
     }
