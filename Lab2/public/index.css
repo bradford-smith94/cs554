@@ -1,2 +1,35 @@
 * {
 }
+
+#container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.banner {
+    width: 100%;
+}
+
+
+@media  screen and (max-width: 500px) {
+    #container > article {
+        width: 100%;
+        flex: 0 1 auto;
+    }
+}
+@media  screen and (min-width: 501px) and (max-width: 800px) {
+    #container > article {
+        width: 50%;
+        flex: 0 1 auto;
+    }
+}
+@media  screen and (min-width: 801px) {
+    #container > article {
+        width: 33%;
+        flex: 0 1 auto;
+    }
+}
