@@ -4,3 +4,8 @@
 
 ## Node.js
 */node_modules/
+
+## Lab specific stuff ##
+
+# gulp will generate public css files in Lab3
+Lab3/public/css/*
