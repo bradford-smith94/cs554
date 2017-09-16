@@ -1,4 +1,7 @@
-body html {
-    background: $body-background;
-    color: $body-foreground;
+@import "variables";
+@import "../bootstrap-4.0.0-beta/scss/bootstrap.scss";
+
+* {
+    background-color: $body-bg;
+    color: $body-color;
 }

@@ -17,8 +17,8 @@ const sassFiles = [
 
 gulp.task("sass", () => {
     gulp.src(sassFiles)
-        .pipe(concatenate("styles.scss"))
-        .pipe(gulpSASS())
+        .pipe(gulpSASS().on("error", gulpSASS.logError))
+        .pipe(concatenate("styles.css"))
         .pipe(gulp.dest("./public/css/"))
         .pipe(autoPrefix({
             browsers: ['last 2 versions'],
