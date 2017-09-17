@@ -7,17 +7,18 @@
     </head>
     <body>
         <h1>Only the Best Products</h1>
+        <p>A great storefront created for CS 554 Lab 3.</p>
         <nav>
             <a href="#procyon-lotor">Procyon Lotor</a>
             <a href="#infantilized-sequoia">Infantilized Sequoia</a>
             <a href="#turbo-encabulator">Turbo Encabulator</a>
             <a href="#non-stick-tape">Non-stick Tape</a>
-            <a href="#dark-lightbulbs">Dark Ligthbulbs</a>
+            <a href="#dark-lightbulbs">Darkbulbs</a>
             <a href="#wom">Write-only Memory Chip</a>
             <a href="#sos">Submarine-Optimized Screen Doors</a>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+            <a href="#raass">Rain Activated Automatic Sprinkler System</a>
+            <a href="#unsharp-knife">Unsharp Knife</a>
+            <a href="#feetpants">Feetpants</a>
         </nav>
         <div class="container">
             <div class="row">
@@ -81,7 +82,7 @@
                     <div class="card" id="dark-lightbulbs">
                         <img class="card-img-top" src="img/dark-lightblub.jpg" alt="Dark lightbulbs card image">
                         <div class="card-body">
-                            <h2 class="card-title">Dark Lightbulbs</h2>
+                            <h2 class="card-title">Darkbulbs</h2>
                             <p class="card-text">
                             They're like lightbulbs, except they don't produce light.
                             </p>
@@ -120,39 +121,42 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="card" id="">
-                        <img class="card-img-top" src="" alt="">
+                    <div class="card" id="raass">
+                        <img class="card-img-top" src="img/raass.jpg" alt="Rain Activated Automatic Sprinkler System card image">
                         <div class="card-body">
-                            <h2 class="card-title"></h2>
+                            <h2 class="card-title">Rain Activated Automatic Sprinkler System</h2>
                             <p class="card-text">
+                            Never forget to forget to turn off your sprinklers in the rain ever again!
                             </p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#raass-modal">
                                 See details
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="card" id="">
-                        <img class="card-img-top" src="" alt="">
+                    <div class="card" id="unsharp-knife">
+                        <img class="card-img-top" src="img/dull-knife.jpg" alt="Unsharp Knife card image">
                         <div class="card-body">
-                            <h2 class="card-title"></h2>
+                            <h2 class="card-title">Unsharp Knife</h2>
                             <p class="card-text">
+                            Never cut yourself in the kitchen again!
                             </p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unsharp-knife-modal">
                                 See details
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="card" id="">
-                        <img class="card-img-top" src="" alt="">
+                    <div class="card" id="feetpants">
+                        <img class="card-img-top" src="img/feetpants.png" alt="Feetpants card image">
                         <div class="card-body">
-                            <h2 class="card-title"></h2>
+                            <h2 class="card-title">Feetpants</h2>
                             <p class="card-text">
+                            They're like pants... but for your feet.
                             </p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#feetpants-modal">
                                 See details
                             </button>
                         </div>
@@ -162,7 +166,7 @@
         </div>
 
         <!-- ========================================= MODALS ========================================= -->
-        <div class="modal" id="procyon-lotor-modal" tabindex="-1" role="dialog" aria-labelledby="procyon-lotor-modal-label" aria-hidden="true">
+        <div class="modal fade" id="procyon-lotor-modal" tabindex="-1" role="dialog" aria-labelledby="procyon-lotor-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -174,6 +178,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                    Warning: product is not a puppy!
                     </p>
                     <ul>
                         <li>Product featured in <a href="https://www.youtube.com/watch?v=3MMMe1drnZY">this David Hasselhoff music video</a></li>
@@ -184,7 +189,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="infantilized-sequoia-modal" tabindex="-1" role="dialog" aria-labelledby="infantilized-sequoia-modal-label" aria-hidden="true">
+        <div class="modal fade" id="infantilized-sequoia-modal" tabindex="-1" role="dialog" aria-labelledby="infantilized-sequoia-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -200,6 +205,8 @@
                     </p>
                     <ul>
                         <li>Product featured in <a href="https://www.youtube.com/watch?v=3MMMe1drnZY">this David Hasselhoff music video</a></li>
+                        <li>100% Organic</li>
+                        <li>May refer to itself as Groot</li>
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -207,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="turbo-encabulator-modal" tabindex="-1" role="dialog" aria-labelledby="turbo-encabulator-modal-label" aria-hidden="true">
+        <div class="modal fade" id="turbo-encabulator-modal" tabindex="-1" role="dialog" aria-labelledby="turbo-encabulator-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -223,13 +230,19 @@
                     The latter consisted simply of six hydrocoptic marzlevanes, so fitted to the ambifacient lunar waneshaft that side fumbling was effectively prevented.
                     The main winding was of the normal lotus-o-delta type placed in panedermic semi-bovoid slots in the stator, every seventh conductor being connected by a nonreversible tremie pipe to the differential girdlespring on the "up" end of grammeters.
                     </p>
+                    <ul>
+                        <li>Used by Chrysler</li>
+                        <li>Used by General Electric</li>
+                        <li>Used by Rockwell Automation</li>
+                        <li>Featured by TIME Magazine</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="non-stick-tape-modal" tabindex="-1" role="dialog" aria-labelledby="non-stick-tape-modal-label" aria-hidden="true">
+        <div class="modal fade" id="non-stick-tape-modal" tabindex="-1" role="dialog" aria-labelledby="non-stick-tape-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -244,17 +257,21 @@
                     One large (50 meter) roll of completely unsticky tape.
                     This tape is so unsticky that it is guaranteed not to stick to anything (even itself), or you get your money back!
                     </p>
+                    <ul>
+                        <li>Not related to teflon tapes or similar products</li>
+                        <li>Definitly not a roll of paper the size of tape</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="dark-lightbulbs-modal" tabindex="-1" role="dialog" aria-labelledby="dark-lightbulbs-modal-label" aria-hidden="true">
+        <div class="modal fade" id="dark-lightbulbs-modal" tabindex="-1" role="dialog" aria-labelledby="dark-lightbulbs-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="dark-lightbulbs-modal-label">Dark Lightbulbs: Details</h3>
+                        <h3 class="modal-title" id="dark-lightbulbs-modal-label">Darkbulbs: Details</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -262,11 +279,12 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                    That's right, these lightbulbs don't produce any light at all!
+                    That's right, these bulbs don't produce any light at all!
                     In fact, not only do they not produce light, but they actually remove it from the environment.
-                    When powered on, these lights will absorb any surrounding light.
+                    When powered on, these lights (I mean "darks") will absorb any surrounding light.
                     </p>
                     <ul>
+                        <li>Q.C. Passed</li>
                         <li>Product has recieved a five star review from the American Foundation for the Blind</li>
                     </ul>
                 </div>
@@ -275,7 +293,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="wom-modal" tabindex="-1" role="dialog" aria-labelledby="wom-modal-label" aria-hidden="true">
+        <div class="modal fade" id="wom-modal" tabindex="-1" role="dialog" aria-labelledby="wom-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -287,14 +305,20 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                    Worried about hackers reading your passwords and other secrets?
+                    Save them on some guaranteed Write-only Memory, no one will ever read your secret information.
                     </p>
+                    <ul>
+                        <li>More secure than conventional HDDs and SSDs</li>
+                        <li>2017 Winner of the IEEE Data Security Award</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="sos-modal" tabindex="-1" role="dialog" aria-labelledby="sos-modal-label" aria-hidden="true">
+        <div class="modal fade" id="sos-modal" tabindex="-1" role="dialog" aria-labelledby="sos-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -306,21 +330,24 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                    Ever wanted to let some fresh air in while you're underwater in your submersible vehicle?
+                    Ever wanted to let in some fresh air while you're underwater in your submersible vehicle?
                     Now you can!
-                    Our Submarine Optimized Screen-Doors are the perfect solution!
+                    Our Submarine Optimized Screen-Doors provide all the functionality of a door while maintaining great airflow.
                     </p>
+                    <ul>
+                        <li>Made from fish safe materials</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal fade" id="raass-modal" tabindex="-1" role="dialog" aria-labelledby="raass-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id=""></h3>
+                        <h3 class="modal-title" id="raass-modal-label">Rain Activated Automatic Sprinkler System: Details</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -328,18 +355,25 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                    Ever see sprinklers on in the rain and wonder to yourself: "Did I remember to turn off my sprinklers?".
+                    Well, with the Rain Activated Automatic Sprinkler System you'll never have to wonder again!
+                    When the system detects rain, it turns on the sprinkler for you.
                     </p>
+                    <ul>
+                        <li>Two thumbs up from your local water company</li>
+                        <li>Drought-mode switch to make you feel better</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal fade" id="unsharp-knife-modal" tabindex="-1" role="dialog" aria-labelledby="unsharp-knife-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id=""></h3>
+                        <h3 class="modal-title" id="unsharp-knife-modal-label">Unsharp Knife: Details</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -347,18 +381,24 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                    This knife isn't just dull, it actually can't be sharpened either!
+                    Which means you'll never cut yourself with it!
                     </p>
+                    <ul>
+                        <li>Rated #1 in kitchen knife safety.</li>
+                        <li>Proven to reduce knife related kitchen injuries by 100%</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal fade" id="feetpants-modal" tabindex="-1" role="dialog" aria-labelledby="feetpants-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id=""></h3>
+                        <h3 class="modal-title" id="feetpants-modal-label">Feetpants: Details</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -366,7 +406,12 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                    Originally invented by Nicholas Minervi and Nicholas Russo in early 2014, Feetpants are a revolutionary new clothing item like pants, but for your feet.
+                    Feetpants can be worn with or without shoes.
                     </p>
+                    <ul>
+                        <li>Available in many colors and styles</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
