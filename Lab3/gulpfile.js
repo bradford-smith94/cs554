@@ -15,6 +15,12 @@ const sassFiles = [
     "./src/styles/custom.scss"
 ];
 
+const vendorJs = [
+    "./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/popper.js/dist/umd/popper.min.js",
+    "./src/bootstrap-4.0.0-beta/dist/js/bootstrap.min.js"
+];
+
 gulp.task("sass", () => {
     gulp.src(sassFiles)
         .pipe(gulpSASS().on("error", gulpSASS.logError))
@@ -29,8 +35,14 @@ gulp.task("sass", () => {
         .pipe(gulp.dest("./public/css/"));
 });
 
+gulp.task("js:vendor", () => {
+    gulp.src(vendorJs)
+        .pipe(concatenate("vendor.min.js"))
+        .pipe(gulp.dest("./public/js/"));
+});
+
 gulp.task("watch", () => {
     gulp.watch(sassFiles, ["sass"]);
 });
 
-gulp.task("default", ["sass", "watch"]);
+gulp.task("default", ["sass", "js:vendor", "watch"]);

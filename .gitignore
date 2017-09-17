@@ -7,5 +7,6 @@
 
 ## Lab specific stuff ##
 
-# gulp will generate public css files in Lab3
-Lab3/public/css/*
+# gulp will generate public css and js files in Lab3
+Lab3/public/css/
+Lab3/public/js/
