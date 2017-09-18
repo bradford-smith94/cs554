@@ -1,3 +1,10 @@
-$body-bg: #414141;
-$body-color: #d3d7cf;
+$my-bg: #414141;
+$my-fg: #d3d7cf;
 $highlight-color: #87ff87;
+
+$body-bg: $my-bg;
+$body-color: $my-fg;
+
+$theme-colors: (
+    primary: $highlight-color
+);

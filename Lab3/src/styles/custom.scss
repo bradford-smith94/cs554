@@ -1,7 +1,19 @@
 @import "variables";
 @import "../bootstrap-4.0.0-beta/scss/bootstrap.scss";
 
-* {
-    background-color: $body-bg;
-    color: $body-color;
+.card {
+    margin-bottom: 5px;
+
+    .card-body {
+        background-color: $my-bg;
+        color: $my-fg;
+    }
+}
+
+.navbar {
+    //use map-get to avoid hard-coding bootstrap breakpoints
+    @media screen and (min-width: map-get($grid-breakpoints, "md")) {
+        float: left;
+        display: inline;
+    }
 }
