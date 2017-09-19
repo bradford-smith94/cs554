@@ -10,6 +10,14 @@
     }
 }
 
+.modal-header, .modal-body, .modal-footer {
+    background-color: $my-bg;
+
+    button.close {
+        color: $my-fg;
+    }
+}
+
 .navbar {
     //use map-get to avoid hard-coding bootstrap breakpoints
     @media screen and (min-width: map-get($grid-breakpoints, "md")) {
