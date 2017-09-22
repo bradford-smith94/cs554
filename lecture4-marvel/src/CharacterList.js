@@ -6,11 +6,24 @@ class CharacterList extends Component {
       return <small>No characters!</small>;
     }
 
-    const characterDisplays = this.props.characters.map((character) => {
+    const characterDisplays = characters.map(character => {
+      const description = character.description ? (
+        <p>{character.description}</p>
+      ) : null;
+
+      const { thumbnail } = character;
+      const picture = thumbnail ? (
+        <img
+          src={`${thumbnail.path}.${thumbnail.extension}`}
+          alt={character.name}
+        />
+      ) : null;
+
       return (
         <div key={character.id}>
           <h3>{character.name}</h3>
-          <p>{character.description}</p>
+          {description}
+          {picture}
         </div>
       );
     })

@@ -35,6 +35,7 @@ class App extends Component {
 
     const resultList = response.data.data.results;
     console.log(resultList);
+    this.setState({ characterList: resultList });
   }
 
   render() {
