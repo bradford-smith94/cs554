@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from "axios";
+import axiosInstance from "./utils/axiosinstance.js";
 import CharacterList from "./CharacterList";
 
 class App extends Component {
@@ -28,9 +28,9 @@ class App extends Component {
   async searchForMatches(searchQuery) {
     // more shorthand: searchQuery = this.state.searchQuery
     //const { searchQuery } = this.state;
-    const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith={searchQuery}&apikey=<m-api-key>`
+    const url = `characters?nameStartsWith={searchQuery}`
     //alert(url);
-    const response = await axios.get(url);
+    const response = await axiosInstance.get(url);
     console.log(response);
 
     const resultList = response.data.data.results;
