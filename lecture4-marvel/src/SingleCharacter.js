@@ -1,39 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axiosInstance from "./utils/axiosinstance.js";
-import CharacterList from "./CharacterList";
+import React, { Component } from "react";
+import "./App.css";
+import axiosInstance from "./utils/axiosInstance";
 
 class SingleCharacter extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      characterData: undefined,
+      character: undefined,
       loading: false
+    };
+  }
+
+  async loadCharacterById(characterId) {
+    try {
+      this.setState({ loading: true });
+      const response = await axiosInstance.get(`characters/${characterId}`);
+      const character = response.data.data.results[0];
+      this.setState({ loading: false, character });
+    } catch (e) {
+      this.setState({ loading: false });
     }
   }
 
   async componentDidMount() {
-    /* runs the first time the page is displayed */
     const characterId = this.props.match.params.id;
-    try {
-      this.setState({loading: true});
-      const response = await axiosInstance.get(`characters/${characterId}`);
-    } catch (e) {
-      this.setState({loading: false});
-    }
+    await this.loadCharacterById(characterId);
   }
 
   async componentWillReceiveProps(nextProps) {
-    /* runs on subsequent reloads with new properties */
+    const characterId = nextProps.match.params.id;
+    const oldCharacterId = this.props.match.params.id;
+
+    if (characterId !== oldCharacterId) {
+      await this.loadCharacterById(characterId);
+    }
   }
 
   render() {
-    return (
-      <div className="single-character-page">
-      </div>
-    );
+    let body = null;
+
+    if (this.state.loading) {
+      body = <div>Loading...</div>;
+    } else if (this.state.character) {
+      body = (
+        <div>
+          <h2>{this.state.character.name}</h2>
+          <hr />
+        </div>
+      );
+    } else {
+      body = <div />;
+    }
+
+    return <div className="single-character-page">{body}</div>;
   }
 }
 
