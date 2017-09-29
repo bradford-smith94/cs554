@@ -4,8 +4,7 @@ import './App.css';
 import axiosInstance from "./utils/axiosinstance.js";
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
-import CharacterSearchPage from "./CharacterSearchPage.js";
-import SingleCharacter from "./SingleCharacter.js";
+import Characters from "./Characters";
 
 class App extends Component {
   render() {
@@ -21,8 +20,8 @@ class App extends Component {
           </div>
           <div className="App-body">
             <Switch>
-              <Route path="/character/:id" component={SingleCharacter}/>
-              <Route path="/" component={CharacterSearchPage}/>
+              <Route path="/character" component={Characters}/>
+              <Redirect from="/" to="/character" />
             </Switch>
           </div>
         </div>
