@@ -21,3 +21,14 @@ lecture4-marvel/.env.production.local
 lecture4-marvel/npm-debug.log*
 lecture4-marvel/yarn-debug.log*
 lecture4-marvel/yarn-error.log*
+
+# Lab4 react-app
+Lab4/build/
+Lab4/coverage/
+Lab4/.env.local
+Lab4/.env.development.local
+Lab4/.env.test.local
+Lab4/.env.production.local
+Lab4/npm-debug.log*
+Lab4/yarn-debug.log*
+Lab4/yarn-error.log*
