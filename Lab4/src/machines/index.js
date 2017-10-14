@@ -12,14 +12,11 @@ class Machines extends Component {
     const { url } = match;
     return (
       <Router>
-        <div className="App-body">
-          <h2>Machines</h2>
-          <Switch>
-            <Route path={`${url}/page/:page`} component={PagedMachines}/>
-            <Route path={`${url}/:id`} component={SingleMachine}/>
-            <Redirect from={`${url}/`} to={`${url}/page/0`}/>
-          </Switch>
-      </div>
+        <Switch>
+          <Route path={`${url}/page/:page`} component={PagedMachines}/>
+          <Route path={`${url}/:id`} component={SingleMachine}/>
+          <Redirect from={`${url}/`} to={`${url}/page/0`}/>
+        </Switch>
       </Router>
     );
   }

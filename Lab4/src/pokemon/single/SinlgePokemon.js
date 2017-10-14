@@ -4,6 +4,8 @@ import strings from '../../utils/strings.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { BrowserRouter as Switch, Redirect } from 'react-router-dom';
 
+import LoadingText from '../../utils/loading.js';
+
 class SinglePokemon extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +49,7 @@ class SinglePokemon extends Component {
     const { url } = match;
 
     if (this.state.loading) {
-      body = <div>Loading...</div>
+      body = <LoadingText/>;
     } else if (this.state.pokemon !== undefined) {
       let height = this.state.pokemon.height * .1;
       if (height != 1) {

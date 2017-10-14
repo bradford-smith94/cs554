@@ -12,14 +12,11 @@ class Berries extends Component {
     const { url } = match;
     return (
       <Router>
-        <div className="App-body">
-          <h2>Berries</h2>
-          <Switch>
-            <Route path={`${url}/page/:page`} component={PagedBerries}/>
-            <Route path={`${url}/:id`} component={SingleBerry}/>
-            <Redirect from={`${url}/`} to={`${url}/page/0`}/>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path={`${url}/page/:page`} component={PagedBerries}/>
+          <Route path={`${url}/:id`} component={SingleBerry}/>
+          <Redirect from={`${url}/`} to={`${url}/page/0`}/>
+        </Switch>
       </Router>
     );
   }
