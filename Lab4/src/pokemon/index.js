@@ -16,7 +16,7 @@ class Pokemon extends Component {
           <h2>{strings.pokemon}</h2>
           <Switch>
             <Route path={`${url}/page/:page`} component={PagedPokemon}/>
-            <Route path={`${url}/id/:id`} component={SinglePokemon}/>
+            <Route path={`${url}/:id`} component={SinglePokemon}/>
             <Redirect from={`${url}/`} to={`${url}/page/0`}/>
           </Switch>
         </div>

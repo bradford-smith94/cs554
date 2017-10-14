@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import strings from '../../utils/strings.js';
+//import strings from '../../utils/strings.js';
 
-class SinglePokemon extends Component {
+class SingleMachine extends Component {
   constructor(props) {
     super(props);
 
@@ -13,9 +13,9 @@ class SinglePokemon extends Component {
 
   render() {
     return (
-      <h3>Single {strings.pokemon} Page</h3>
+      <h3>Single Machine Page</h3>
     );
   }
 }
 
-export default SinglePokemon;
+export default SingleMachine;

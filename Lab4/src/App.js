@@ -15,7 +15,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <Link to='/'>
+            <Link className="Header-link" to='/'>
               <h1 className="App-title">{strings.pokedex}</h1>
             </Link>
           </header>
