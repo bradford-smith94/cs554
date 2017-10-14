@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-//import strings from '../../utils/strings.js';
+import strings from '../../utils/strings.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { BrowserRouter as Switch, Redirect } from 'react-router-dom';
 
@@ -48,10 +48,42 @@ class SinglePokemon extends Component {
 
     if (this.state.loading) {
       body = <div>Loading...</div>
-    } else if (this.state.pokemon) {
+    } else if (this.state.pokemon !== undefined) {
+      let height = this.state.pokemon.height * .1;
+      if (height != 1) {
+        height = <li>Height: {height} meters</li>
+      } else {
+        height = <li>Height: {height} meter</li>
+      }
+
+      let weight = this.state.pokemon.weight * .1;
+      if (weight != 1) {
+        weight = <li>Weight: {weight} kilograms</li>
+      } else {
+        weight = <li>Weight: {weight} kilogram</li>
+      }
+
+      let types = '';
+      if (this.state.pokemon.types.length > 1) {
+        types += this.state.pokemon.types[0].type.name;
+        for (let i = 1; i < this.state.pokemon.types.length; i++) {
+          types += ', ' + this.state.pokemon.types[i].type.name
+        }
+        types = <li>Types: {types}</li>
+      } else {
+        types = <li>Type: {this.state.pokemon.types[0].type.name}</li>
+      }
+
       body = (
         <div>
-          <h2>{this.state.pokemon.name}</h2>
+          <h2>{strings.pokemon}: {this.state.pokemon.name}</h2>
+          <img src={`${this.state.pokemon.sprites.front_default}`} alt={`The default front in-game sprite for ${this.state.pokemon.name}`}/>
+          <ul>
+            <li>Number: {this.state.pokemon.id}</li>
+            {height}
+            {weight}
+            {types}
+          </ul>
         </div>
       );
     } else if (this.state.error) {

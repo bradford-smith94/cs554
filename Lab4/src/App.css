@@ -20,3 +20,12 @@
 .Header-link {
   color: white;
 }
+
+p {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+ul {
+  list-style: none;
+}
