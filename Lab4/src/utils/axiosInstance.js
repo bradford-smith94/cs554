@@ -4,7 +4,7 @@ const apiRoot = 'https://pokeapi.co/api/v2/';
 
 const instance = axios.create();
 
-axios.interceptors.request.use(function (config) {
+instance.interceptors.request.use(function (config) {
   config.url = `${apiRoot}${config.url}`;
   return config;
 }, function (error) {

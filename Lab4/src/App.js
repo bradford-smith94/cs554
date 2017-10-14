@@ -18,16 +18,16 @@ class App extends Component {
             <Link className="Header-link" to='/'>
               <h1 className="App-title">{strings.pokedex}</h1>
             </Link>
+            <p className="App-intro">
+              This is a simple {strings.pokedex} app designed to provide information about {strings.pokemon}, Berries and Machines.
+            </p>
           </header>
-          <p className="App-intro">
-            This is a simple {strings.pokedex} app designed to provide information about {strings.pokemon}, Berries and Machines.
-          </p>
           <Switch>
             <Route path='/pokemon' component={Pokemon}/>
             <Route path='/berries' component={Berries}/>
             <Route path='/machines' component={Machines}/>
-            <Route exact path='/' component={Main}/>
-            <Route path='/' component={NotFound}/>
+            <Route path='/:error' component={NotFound}/>
+            <Route path='/' component={Main}/>
           </Switch>
         </div>
       </Router>

@@ -4,10 +4,6 @@ import strings from '../utils/strings.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Router>
