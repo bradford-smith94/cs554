@@ -9,15 +9,15 @@
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
 .App-intro {
   font-size: large;
 }
 
 .Header-link {
+  color: white;
+}
+
+.Header-link :hover {
   color: white;
 }
 

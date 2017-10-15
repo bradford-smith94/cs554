@@ -52,14 +52,14 @@ class SinglePokemon extends Component {
       body = <LoadingText/>;
     } else if (this.state.pokemon !== undefined) {
       let height = this.state.pokemon.height * .1;
-      if (height != 1) {
+      if (height !== 1) {
         height = <li>Height: {height} meters</li>
       } else {
         height = <li>Height: {height} meter</li>
       }
 
       let weight = this.state.pokemon.weight * .1;
-      if (weight != 1) {
+      if (weight !== 1) {
         weight = <li>Weight: {weight} kilograms</li>
       } else {
         weight = <li>Weight: {weight} kilogram</li>
