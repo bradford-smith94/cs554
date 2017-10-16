@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 
 import strings from '../../utils/strings.js';
 import axiosInstance from '../../utils/axiosInstance.js';
-import { BrowserRouter as Switch, Redirect } from 'react-router-dom';
 
 import { Pager } from 'react-bootstrap';
 
 import LoadingText from '../../utils/loading.js';
+import NotFound from '../../404';
 
 class PagedPokemon extends Component {
   constructor(props) {
@@ -48,23 +48,23 @@ class PagedPokemon extends Component {
   render() {
     let body = null;
     const { match } = this.props;
-    const { url } = match;
 
     if (this.state.loading) {
       body = <LoadingText/>
-    } else if (this.state.pokemonList !== undefined) {
+    } else if (this.state.pokemonList !== undefined
+               && this.state.pokemonList.results.length) {
       let prevButton = '';
       let nextButton = '';
 
       if (this.state.pokemonList.next) {
-        nextButton = <Pager.Item href={`/pokemon/page/${parseInt(match.params.page) + 1}`}>Next &rarr;</Pager.Item>
+        nextButton = <Pager.Item href={`/pokemon/page/${parseInt(match.params.page, 10) + 1}`}>Next &rarr;</Pager.Item>
       } else {
-        nextButton = <Pager.Item disabled href={`/pokemon/page/${parseInt(match.params.page) + 1}`}>Next &rarr;</Pager.Item>
+        nextButton = <Pager.Item disabled href={`/pokemon/page/${parseInt(match.params.page, 10) + 1}`}>Next &rarr;</Pager.Item>
       }
       if (this.state.pokemonList.previous) {
-        prevButton = <Pager.Item href={`/pokemon/page/${parseInt(match.params.page) - 1}`}>&larr; Previous</Pager.Item>
+        prevButton = <Pager.Item href={`/pokemon/page/${parseInt(match.params.page, 10) - 1}`}>&larr; Previous</Pager.Item>
       } else {
-        prevButton = <Pager.Item disabled href={`/pokemon/page/${parseInt(match.params.page) - 1}`}>&larr; Previous</Pager.Item>
+        prevButton = <Pager.Item disabled href={`/pokemon/page/${parseInt(match.params.page, 10) - 1}`}>&larr; Previous</Pager.Item>
       }
 
       let pagerInstance = (
@@ -79,7 +79,7 @@ class PagedPokemon extends Component {
           <h2>{strings.pokemon} Page {match.params.page}</h2>
           {this.state.pokemonList.results.map(function(obj, i) {
             return (
-              <a href={`/pokemon/${obj.name}`}>
+              <a key={i} href={`/pokemon/${obj.name}`}>
                 <h3>{obj.name}</h3>
               </a>
             );
@@ -87,9 +87,11 @@ class PagedPokemon extends Component {
           {pagerInstance}
         </div>
       );
-    } else if (this.state.error) {
+    } else if (this.state.error ||
+      (this.state.pokemonList !== undefined
+      && this.state.pokemonList.results.length === 0)) {
       body = (
-        <Switch><Redirect from={`${url}`} to={'/404'}/></Switch>
+        <NotFound/>
       );
     } else {
       body = <div />

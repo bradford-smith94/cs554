@@ -13,7 +13,15 @@
   font-size: large;
 }
 
+.Loading-text {
+  font-size: large;
+}
+
 .Header-link {
+  color: white;
+}
+
+.Header-link :visited {
   color: white;
 }
 
@@ -21,9 +29,18 @@
   color: white;
 }
 
+.Header-link :active {
+  color: white;
+}
+
 p {
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.App-body  > * > p {
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 ul {

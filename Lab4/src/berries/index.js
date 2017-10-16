@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-//import strings from '../utils/strings.js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SingleBerry from './single/SingleBerry.js';
@@ -11,10 +10,12 @@ class Berries extends Component {
     const { match } = this.props;
     const { url } = match;
     return (
-      <Switch>
-        <Route path={`${url}/page/:page`} component={PagedBerries}/>
-        <Route path={`${url}/:id`} component={SingleBerry}/>
-      </Switch>
+      <Router>
+        <Switch>
+          <Route path={`${url}/page/:page`} component={PagedBerries}/>
+          <Route path={`${url}/:id`} component={SingleBerry}/>
+        </Switch>
+      </Router>
     );
   }
 }

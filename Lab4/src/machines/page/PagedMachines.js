@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 
-//import strings from '../../utils/strings.js';
 import axiosInstance from '../../utils/axiosInstance.js';
-import { BrowserRouter as Switch, Redirect } from 'react-router-dom';
 
 import { Pager } from 'react-bootstrap';
 
 import LoadingText from '../../utils/loading.js';
+import NotFound from '../../404';
 
 class PagedMachines extends Component {
   constructor(props) {
@@ -48,23 +47,23 @@ class PagedMachines extends Component {
   render() {
     let body = null;
     const { match } = this.props;
-    const { url } = match;
 
     if (this.state.loading) {
       body = <LoadingText/>
-    } else if (this.state.machinesList !== undefined) {
+    } else if (this.state.machinesList !== undefined
+               && this.state.machinesList.results.length) {
       let prevButton = '';
       let nextButton = '';
 
       if (this.state.machinesList.next) {
-        nextButton = <Pager.Item href={`/machines/page/${parseInt(match.params.page) + 1}`}>Next &rarr;</Pager.Item>
+        nextButton = <Pager.Item href={`/machines/page/${parseInt(match.params.page, 10) + 1}`}>Next &rarr;</Pager.Item>
       } else {
-        nextButton = <Pager.Item disabled href={`/machines/page/${parseInt(match.params.page) + 1}`}>Next &rarr;</Pager.Item>
+        nextButton = <Pager.Item disabled href={`/machines/page/${parseInt(match.params.page, 10) + 1}`}>Next &rarr;</Pager.Item>
       }
       if (this.state.machinesList.previous) {
-        prevButton = <Pager.Item href={`/machines/page/${parseInt(match.params.page) - 1}`}>&larr; Previous</Pager.Item>
+        prevButton = <Pager.Item href={`/machines/page/${parseInt(match.params.page, 10) - 1}`}>&larr; Previous</Pager.Item>
       } else {
-        prevButton = <Pager.Item disabled href={`/machines/page/${parseInt(match.params.page) - 1}`}>&larr; Previous</Pager.Item>
+        prevButton = <Pager.Item disabled href={`/machines/page/${parseInt(match.params.page, 10) - 1}`}>&larr; Previous</Pager.Item>
       }
 
       let pagerInstance = (
@@ -78,9 +77,9 @@ class PagedMachines extends Component {
         <div>
           <h2>Machines Page {match.params.page}</h2>
           {this.state.machinesList.results.map(function(obj, i) {
-            let id = obj.url.match(/([^\/]*)\/*$/)[1];
+            let id = obj.url.match(/([^/]*)\/*$/)[1];
             return (
-              <a href={`/machines/${id}`}>
+              <a key={i} href={`/machines/${id}`}>
                 <h3>Machine {id}</h3>
               </a>
             );
@@ -88,9 +87,11 @@ class PagedMachines extends Component {
           {pagerInstance}
         </div>
       );
-    } else if (this.state.error) {
+    } else if (this.state.error ||
+      (this.state.machinesList !== undefined
+      && this.state.machinesList.results.length === 0)) {
       body = (
-        <Switch><Redirect from={`${url}`} to={'/404'}/></Switch>
+        <NotFound/>
       );
     } else {
       body = <div />

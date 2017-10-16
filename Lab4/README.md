@@ -1,2 +1,2 @@
-# Lab 4: Pok&eacute;dex
+# Lab 4: Pokédex
 Run `npm start` to begin.

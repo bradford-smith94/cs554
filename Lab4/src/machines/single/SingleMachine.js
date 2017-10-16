@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-//import strings from '../../utils/strings.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { BrowserRouter as Switch, Redirect } from 'react-router-dom';
 
