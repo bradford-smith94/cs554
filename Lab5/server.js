@@ -39,14 +39,18 @@ app.get("/api/people/history", function (request, response) {
  * people ordered by most recently accessed first.
  */
 app.get("/api/people/:id", function (request, response) {
-    response.json({ success: "Good Route" });
+    data.getById(parseInt(request.params.id, 10)).then(function(person) {
+        response.json({ person });
+    }, function(errorMessage) {
+        response.status(400).json({ error: errorMessage });
+    });
 });
 
 /**
  * Catch anything else and give a 404
  */
 app.use("*", function (request, response) {
-    response.status(404).json({ error: "Not found" });
+    response.status(404).json({ error: "Route Not Found" });
 });
 
 app.listen(3000, function() {
