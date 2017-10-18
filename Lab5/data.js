@@ -15,13 +15,20 @@ exports.getById = function(id) {
         return Promise.reject('Invalid value for id!');
 
     let people = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+    let person = null
+    for (let i = 0; i < people.length; i++) {
+        if (people[i]['id'] == id) {
+            person = people[i];
+            break;
+        }
+    }
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (people[id]) {
-                resolve(people[id]);
+            if (person) {
+                resolve(person);
             } else {
-                reject({ error: 'Not Found' });
+                reject({ error: 'Person Not Found' });
             }
         }, 5000);
     });

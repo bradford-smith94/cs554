@@ -42,7 +42,11 @@ app.get("/api/people/:id", function (request, response) {
     data.getById(parseInt(request.params.id, 10)).then(function(person) {
         response.json({ person });
     }, function(errorMessage) {
-        response.status(400).json({ error: errorMessage });
+        if (typeof(errorMessage) === 'object') {
+            response.status(404).json({ error: errorMessage.error });
+        } else {
+            response.status(400).json({ error: errorMessage });
+        }
     });
 });
 
