@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 5 server.js
- * 10/18/2017
+ * 10/19/2017
  */
 
 const express = require('express');
@@ -15,6 +15,9 @@ const client = redis.createClient();
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
+//most recently used IDs
+let mru = [];
+
 /* === routes begin here =================================================== */
 
 /**
@@ -23,8 +26,14 @@ bluebird.promisifyAll(redis.Multi.prototype);
  * This route will resond with an array of the last 20 users in the cache from
  * the recently viewed list. It may include duplicate users.
  */
-app.get("/api/people/history", function (request, response) {
-    response.json({ success: "Good Route" });
+app.get("/api/people/history", async function (request, response) {
+    let history = [];
+    for (let i = 0; i < mru.length && i < 20; i++) {
+        history.push(
+            JSON.parse(await client.getAsync(mru[i]))
+        );
+    }
+    response.send(history);
 });
 
 /**
@@ -44,10 +53,12 @@ app.get("/api/people/:id", async function (request, response) {
 
     if (cacheResponse) {
         response.json({ person: JSON.parse(cacheResponse) });
+        mru.unshift(id);
     } else {
         try {
             person = await data.getById(parseInt(id, 10));
             response.json({ person });
+            mru.unshift(id);
             let cacheRequest = await client.setAsync(id,
                                                      JSON.stringify(person));
         } catch (errorMessage) {
