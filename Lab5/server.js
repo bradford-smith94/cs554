@@ -38,16 +38,26 @@ app.get("/api/people/history", function (request, response) {
  * If the person is found their ID will be added to a list of recently viewed
  * people ordered by most recently accessed first.
  */
-app.get("/api/people/:id", function (request, response) {
-    data.getById(parseInt(request.params.id, 10)).then(function(person) {
-        response.json({ person });
-    }, function(errorMessage) {
-        if (typeof(errorMessage) === 'object') {
-            response.status(404).json({ error: errorMessage.error });
-        } else {
-            response.status(400).json({ error: errorMessage });
+app.get("/api/people/:id", async function (request, response) {
+    const id = request.params.id;
+    const cacheResponse = await client.getAsync(id);
+
+    if (cacheResponse) {
+        response.json({ person: JSON.parse(cacheResponse) });
+    } else {
+        try {
+            person = await data.getById(parseInt(id, 10));
+            response.json({ person });
+            let cacheRequest = await client.setAsync(id,
+                                                     JSON.stringify(person));
+        } catch (errorMessage) {
+            if (typeof(errorMessage) === 'object') {
+                response.status(404).json({ error: errorMessage.error });
+            } else {
+                response.status(400).json({ error: errorMessage });
+            }
         }
-    });
+    }
 });
 
 /**
