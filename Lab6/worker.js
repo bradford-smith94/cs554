@@ -14,16 +14,16 @@ const url = 'https://gist.githubusercontent.com/philbarresi/' +
 (async function() {
     let data = await request(url, true);
 
-    redisConnection.on('get-person', function (message, channel) {
+    redisConnection.on('get-person:request:*', function (message, channel) {
         let messageText = message.data.message;
     });
-    redisConnection.on('create-person', function (message, channel) {
+    redisConnection.on('create-person:request:*', function (message, channel) {
         let messageText = message.data.message;
     });
-    redisConnection.on('delete-person', function (message, channel) {
+    redisConnection.on('delete-person:request:*', function (message, channel) {
         let messageText = message.data.message;
     });
-    redisConnection.on('update-person', function (message, channel) {
+    redisConnection.on('update-person:request:*', function (message, channel) {
         let messageText = message.data.message;
     });
 }());
