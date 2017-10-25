@@ -70,7 +70,7 @@ const url = 'https://gist.githubusercontent.com/philbarresi/' +
         let successEvent = `${eventName}:success:${requestId}`;
         let failedEvent = `${eventName}:failed:${requestId}`;
 
-        let person = JSON.parse(message.data.person);
+        let person = message.data.person;
         let errorMessage = '';
 
         //error check given fields
@@ -183,11 +183,12 @@ const url = 'https://gist.githubusercontent.com/philbarresi/' +
         let successEvent = `${eventName}:success:${requestId}`;
         let failedEvent = `${eventName}:failed:${requestId}`;
 
-        let person = JSON.parse(message.data.person);
+        let id = parseInt(message.data.id, 10);
+        let person = message.data.person;
         let errorMessage = '';
 
-        //error check given fields
-        if (person.id === null || person.id === undefined) {
+        //error check given fields, use id from route not body
+        if (id === null || id === undefined) {
             errorMessage = 'ID is required';
         } else if (person.first_name === null || person.first_name === undefined) {
             errorMessage = 'first_name is required';
@@ -199,7 +200,7 @@ const url = 'https://gist.githubusercontent.com/philbarresi/' +
             errorMessage = 'gender is required';
         } else if (person.ip_address === null || person.ip_address === undefined) {
             errorMessage = 'ip_address is required';
-        } else if (typeof(person.id) !== 'number' || isNaN(person.id) || person.id <= 0) {
+        } else if (typeof(id) !== 'number' || isNaN(id) || id <= 0) {
             errorMessage = 'Invalid value for ID';
         } else if (typeof(person.first_name) !== 'string') {
             errorMessage = 'Invalid value for first_name';
@@ -215,7 +216,7 @@ const url = 'https://gist.githubusercontent.com/philbarresi/' +
 
         let found = false;
         for (let i = 0; i < data.length; i++) {
-            if (data[i]['id'] == person.id) {
+            if (data[i]['id'] == id) {
                 data.splice(i, 1, person);
                 found = true;
                 break;
