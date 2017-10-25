@@ -1,13 +1,14 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 6 server.js
- * 10/23/2017
+ * 10/25/2017
  */
 
 const bluebird = require('bluebird');
 const bodyParser = require('body-parser');
 const express = require('express');
-const nrpSender = require('nrp-sender-shim');
-const redisConnection = require('redis-connection');
+
+const nrpSender = require('./nrp-sender-shim');
+const redisConnection = require('./redis-connection');
 
 const app = express();
 
@@ -23,16 +24,18 @@ app.use(bodyParser.json());
  */
 app.get("/api/people/:id", async function (request, response) {
     try {
-        let response = await nrpSender.sendMessage({
+        let msgResponse = await nrpSender.sendMessage({
             redis: redisConnection,
             eventName: 'get-person',
             data: {
-                message: request.params.id
+                id: request.params.id
             },
             expectsResponse: true
         });
+
+        response.json(msgResponse);
     } catch (e) {
-        res.json({ error: e.message });
+        response.status(e.errorCode).json({ error: e.message });
     }
 });
 
@@ -45,16 +48,18 @@ app.get("/api/people/:id", async function (request, response) {
  */
 app.post("/api/people", async function (request, response) {
     try {
-        let response = await nrpSender.sendMessage({
+        let msgResponse = await nrpSender.sendMessage({
             redis: redisConnection,
             eventName: 'create-person',
             data: {
-                message: request.body.message
+                person: request.body.message
             },
             expectsResponse: true
         });
+
+        response.json(msgResponse);
     } catch (e) {
-        res.json({ error: e.message });
+        response.status(e.errorCode).json({ error: e.message });
     }
 });
 
@@ -67,16 +72,18 @@ app.post("/api/people", async function (request, response) {
  */
 app.delete("/api/people/:id", async function (request, response) {
     try {
-        let response = await nrpSender.sendMessage({
+        let msgResponse = await nrpSender.sendMessage({
             redis: redisConnection,
             eventName: 'delete-person',
             data: {
-                message: request.params.id
+                id: request.params.id
             },
             expectsResponse: true
         });
+
+        response.json(msgResponse);
     } catch (e) {
-        res.json({ error: e.message });
+        response.status(e.errorCode).json({ error: e.message });
     }
 });
 
@@ -89,17 +96,19 @@ app.delete("/api/people/:id", async function (request, response) {
  */
 app.put("/api/people/:id", async function (request, response) {
     try {
-        let response = await nrpSender.sendMessage({
+        let msgResponse = await nrpSender.sendMessage({
             redis: redisConnection,
             eventName: 'update-person',
             data: {
-                //TODO do something with request.params.id
-                message: request.body.message
+                id: request.params.id,
+                person: request.body.message
             },
             expectsResponse: true
         });
+
+        response.json(msgResponse);
     } catch (e) {
-        res.json({ error: e.message });
+        response.status(e.errorCode).json({ error: e.message });
     }
 });
 

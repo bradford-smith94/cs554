@@ -1,10 +1,11 @@
 /* Bradford Smith
  * CS 554 Lab 6 nrp-sender-shim.js
- * 10/24/2017
+ * 10/25/2017
  */
 
 const uuid = require('node-uuid');
-const redisConnection = require('redis-connection');
+
+const redisConnection = require('./redis-connection');
 
 const defaultMessageConfig = {
     data: {},
