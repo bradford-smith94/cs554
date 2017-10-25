@@ -3,7 +3,6 @@
  * 10/25/2017
  */
 
-const bluebird = require('bluebird');
 const bodyParser = require('body-parser');
 const express = require('express');
 
@@ -35,7 +34,11 @@ app.get("/api/people/:id", async function (request, response) {
 
         response.json(msgResponse);
     } catch (e) {
-        response.status(e.errorCode).json({ error: e.message });
+        if (e.errorCode) {
+            response.status(e.errorCode).json({ error: e.message });
+        } else {
+            response.status(504).json({ error: e.message });
+        }
     }
 });
 
@@ -52,14 +55,18 @@ app.post("/api/people", async function (request, response) {
             redis: redisConnection,
             eventName: 'create-person',
             data: {
-                person: request.body.message
+                person: request.body
             },
             expectsResponse: true
         });
 
         response.json(msgResponse);
     } catch (e) {
-        response.status(e.errorCode).json({ error: e.message });
+        if (e.errorCode) {
+            response.status(e.errorCode).json({ error: e.message });
+        } else {
+            response.status(504).json({ error: e.message });
+        }
     }
 });
 
@@ -83,7 +90,11 @@ app.delete("/api/people/:id", async function (request, response) {
 
         response.json(msgResponse);
     } catch (e) {
-        response.status(e.errorCode).json({ error: e.message });
+        if (e.errorCode) {
+            response.status(e.errorCode).json({ error: e.message });
+        } else {
+            response.status(504).json({ error: e.message });
+        }
     }
 });
 
@@ -101,14 +112,18 @@ app.put("/api/people/:id", async function (request, response) {
             eventName: 'update-person',
             data: {
                 id: request.params.id,
-                person: request.body.message
+                person: request.body
             },
             expectsResponse: true
         });
 
         response.json(msgResponse);
     } catch (e) {
-        response.status(e.errorCode).json({ error: e.message });
+        if (e.errorCode) {
+            response.status(e.errorCode).json({ error: e.message });
+        } else {
+            response.status(504).json({ error: e.message });
+        }
     }
 });
 

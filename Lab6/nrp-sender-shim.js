@@ -19,7 +19,7 @@ const sendMessage = function (messageConfig = defaultMessageConfig) {
     return new Promise(function (fulfill, reject) {
         let settings = Object.assign({}, defaultMessageConfig, messageConfig);
 
-    let messageId = uuid.v4();
+        let messageId = uuid.v4();
         let killswitchTimeoutId = undefined;
         let redisConnection = settings.redis;
         let eventName = settings.eventName;
