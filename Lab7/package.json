@@ -1,0 +1,15 @@
+{
+  "name": "bsmith8-cs554-lab7",
+  "version": "0.1.0",
+  "description": "CS 554 Lab 7 submission by Bradford Smith",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bradford Smith",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
+}
