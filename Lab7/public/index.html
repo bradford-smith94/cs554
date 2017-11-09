@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CS 554 Lab 7</title>
+        <link rel="stylesheet" type="text/css" href="/index.css">
+    </head>
+    <body>
+        <h1>Pixabay Searcher</h1>
+        <form action="">
+            <label for="name">Username</label>
+            <input type="text" id="name"/>
+            <label for="search">Search</label>
+            <input type="text" id="search"/>
+            <label for="message">Message</label>
+            <input type="text" id="message"/>
+            <input type="submit" value="Send" id="submit"/>
+        </form>
+        <ul id="results"></ul>
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script>
+            const socket = io('http://localhost:3000/search');
+            const results = $('#results');
+            const form = $('form');
+
+            form.submit(function () {
+                let name = $('#name');
+                let search = $('#search');
+                let message = $('#message');
+
+                let request = {
+                    name,
+                    search,
+                    message
+                };
+
+                socket.emit('request', request);
+
+                name.prop('readonly', true);
+                search.val('');
+                message.val('');
+                return false;
+            });
+
+            socket.on('name-good', function () {
+                alert('TODO: actually do the search');
+            });
+
+            socket.on('name-fail', function () {
+                let name = $('#name');
+                alert('Error: That name is alreay in use, please choose another');
+                name.prop('readonly', false);
+                name.val('');
+            });
+        </script>
+    </body>
+</html>

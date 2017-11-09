@@ -4,12 +4,12 @@
   "description": "CS 554 Lab 7 submission by Bradford Smith",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=socket.io* node server.js"
   },
   "author": "Bradford Smith",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.2",
-    "socket.io": "^2.0.4"
+    "socket.io": "^1.2.0"
   }
 }
