@@ -26,8 +26,11 @@ search.on('connection', function (socket) {
             usersToSocket[request.name] !== socket) {
             socket.emit('name-fail', 'Name already in use');
         } else {
-            usersToSocket[request.name] = socket;
-            console.log(request.name);
+            if (!usersToSocket[request.name]) {
+                usersToSocket[request.name] = socket;
+                console.log('new user');
+            }
+            console.log('<' + request.name + '> has made a request');
             try {
                 let response = await nrpSender.sendMessage({
                     eventName: 'lookup',
