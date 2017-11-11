@@ -4,12 +4,16 @@
   "description": "CS 554 Lab 7 submission by Bradford Smith",
   "main": "server.js",
   "scripts": {
+    "start-all": "./startBoth.sh",
     "test": "DEBUG=socket.io* node server.js"
   },
   "author": "Bradford Smith",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.17.0",
     "express": "^4.16.2",
+    "node-redis-pubsub": "^1.0.3",
+    "node-uuid": "^1.4.8",
     "socket.io": "^1.2.0"
   }
 }

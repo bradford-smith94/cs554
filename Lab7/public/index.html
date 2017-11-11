@@ -30,9 +30,9 @@
                 let message = $('#message');
 
                 let request = {
-                    name,
-                    search,
-                    message
+                    name: name.val(),
+                    search: search.val(),
+                    message: message.val()
                 };
 
                 socket.emit('request', request);
@@ -43,15 +43,21 @@
                 return false;
             });
 
-            socket.on('name-good', function () {
-                alert('TODO: actually do the search');
+            socket.on('response', function () {
+                //TODO: render response
             });
 
-            socket.on('name-fail', function () {
+            socket.on('name-fail', function (errorMessage) {
                 let name = $('#name');
-                alert('Error: That name is alreay in use, please choose another');
+                //TODO: make this not an alert
+                alert('Error: ' + errorMessage);
                 name.prop('readonly', false);
                 name.val('');
+            });
+
+            socket.on('request-fail', function (errorMessage) {
+                //TODO: make this not an alert
+                alert('Error: ' + errorMessage);
             });
         </script>
     </body>
