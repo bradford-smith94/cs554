@@ -6,7 +6,7 @@
 const axiosInstance = require('./axiosHelper.js');
 const redisConnection = require('./redisConnection.js');
 
-redisConnection.on('lookup:request:*', function (message, channel) {
+redisConnection.on('lookup:request:*', async function (message, channel) {
     let requestId = message.requestId;
     let eventName = message.eventName;
 
@@ -21,15 +21,40 @@ redisConnection.on('lookup:request:*', function (message, channel) {
         redisConnection.emit(failedEvent, {
             requestId,
             eventName,
-            data: 'Name is required'
+            data: {
+                message: 'Name is required'
+            }
         });
     } else if (search == null || search === undefined || search == '') {
         redisConnection.emit(failedEvent, {
             requestId,
             eventName,
-            data: 'Search query is required'
+            data: {
+                message: 'Search query is required'
+            }
         });
     }
 
     console.log('<' + name + '> requested: "' + search + '" and said "' + msg + '"');
+    try {
+        let results = await axiosInstance.get('&q=' + encodeURIComponent(search));
+
+        redisConnection.emit(successEvent, {
+            requestId,
+            eventName,
+            data: {
+                name,
+                message: msg,
+                results: results.data
+            }
+        });
+    } catch (e) {
+        redisConnection.emit(failedEvent, {
+            requestId,
+            eventName,
+            data: e
+        });
+    }
 });
+
+console.log('Worker started.');

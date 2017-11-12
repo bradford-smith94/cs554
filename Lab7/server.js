@@ -37,8 +37,8 @@ search.on('connection', function (socket) {
                     data: request
                 });
                 socket.emit('result', response);
-            } catch (errorMessage) {
-                socket.emit('request-fail', errorMessage);
+            } catch (e) {
+                socket.emit('request-fail', e.message);
             }
         }
     });
