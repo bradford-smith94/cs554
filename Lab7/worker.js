@@ -14,7 +14,7 @@ redisConnection.on('lookup:request:*', async function (message, channel) {
     let failedEvent = eventName + ':failed:' + requestId;
 
     let name = message.data.name;
-    let search = message.data.search;
+    let search = encodeURIComponent(message.data.search);
     let msg = message.data.message;
 
     if (name == null || name === undefined || name == '') {
@@ -36,8 +36,10 @@ redisConnection.on('lookup:request:*', async function (message, channel) {
     }
 
     console.log('<' + name + '> requested: "' + search + '" and said "' + msg + '"');
+    let searchString = '?q=' + search;
+    console.log('search string: ' + searchString);
     try {
-        let results = await axiosInstance.get('&q=' + encodeURIComponent(search));
+        let response = await axiosInstance.get(searchString);
 
         redisConnection.emit(successEvent, {
             requestId,
@@ -45,14 +47,15 @@ redisConnection.on('lookup:request:*', async function (message, channel) {
             data: {
                 name,
                 message: msg,
-                results: results.data
+                results: response.data
             }
         });
     } catch (e) {
+        console.log('Request error:\n' + e);
         redisConnection.emit(failedEvent, {
             requestId,
             eventName,
-            data: e
+            data: e.response.data
         });
     }
 });
