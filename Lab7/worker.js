@@ -1,10 +1,10 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 7 worker.js
- * 11/11/2017
+ * 11/12/2017
  */
 
-const axiosInstance = require('./axiosHelper.js');
-const redisConnection = require('./redisConnection.js');
+const axiosInstance = require('./utils/axiosHelper.js');
+const redisConnection = require('./utils/redisConnection.js');
 
 redisConnection.on('lookup:request:*', async function (message, channel) {
     let requestId = message.requestId;

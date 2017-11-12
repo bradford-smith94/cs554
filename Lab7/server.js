@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
  * CS 554 Lab 7 server.js
- * 11/11/2017
+ * 11/12/2017
  */
 
 const express = require('express');
@@ -10,7 +10,7 @@ const io = require('socket.io')(http);
 const search = io.of('/search');
 const usersToSocket = {};
 
-const nrpSender = require('./nrpSender.js');
+const nrpSender = require('./utils/nrpSender.js');
 
 app.use(express.static(__dirname + '/public'));
 

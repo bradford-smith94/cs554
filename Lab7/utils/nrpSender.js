@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
- * CS 554 Lab 7 nrpSender.js
- * 11/11/2017
+ * CS 554 Lab 7 utils/nrpSender.js
+ * 11/12/2017
  */
 
 const uuid = require('node-uuid');

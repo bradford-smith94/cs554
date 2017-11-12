@@ -1,6 +1,6 @@
 /* Bradford Smith (bsmith8)
- * CS 554 Lab 7 axiosHelper.js
- * 11/11/2017
+ * CS 554 Lab 7 utils/axiosHelper.js
+ * 11/12/2017
  */
 
 const axios = require('axios');
