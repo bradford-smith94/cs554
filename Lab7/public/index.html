@@ -7,6 +7,7 @@
     </head>
     <body>
         <h1>Pixabay Searcher</h1>
+        <p id="form-errors"></p>
         <form action="">
             <label for="name">Username</label>
             <input type="text" id="name" required/>
@@ -16,7 +17,7 @@
             <input type="text" id="message"/>
             <input type="submit" value="Send" id="submit"/>
         </form>
-        <ul id="results"></ul>
+        <div id="results"></div>
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
@@ -28,6 +29,9 @@
                 let name = $('#name');
                 let search = $('#search');
                 let message = $('#message');
+                let formErrors = $('#form-errors')
+
+                formErrors.text('');
 
                 let request = {
                     name: name.val(),
@@ -43,21 +47,37 @@
                 return false;
             });
 
-            socket.on('response', function () {
-                //TODO: render response
+            socket.on('response', function (response) {
+                console.log(response);
+                let resultsContainer = $('#results');
+                let hits = response.results.hits;
+
+                for (let i = 0; i < hits.length; i++) {
+                    let newImg = document.createElement('img');
+                    newImg.src = hits[i].previewURL;
+                    newImg.alt = 'A pixabay result tagged ' +
+                        hits[i].tags + ' uploaded by ' + hits[i].user;
+                    resultsContainer.prepend(newImg);
+                }
+                let newMsg = document.createElement('p');
+                newMsg.className = 'message';
+                let text = document.createTextNode(response.name + ' says: ' +
+                    response.message);
+                newMsg.appendChild(text);
+                resultsContainer.prepend(newMsg);
             });
 
             socket.on('name-fail', function (errorMessage) {
                 let name = $('#name');
-                //TODO: make this not an alert
-                alert('Error: ' + errorMessage);
+                let formErrors = $('#form-errors')
+                formErrors.text(errorMessage);
                 name.prop('readonly', false);
                 name.val('');
             });
 
             socket.on('request-fail', function (errorMessage) {
-                //TODO: make this not an alert
-                alert('Error: ' + errorMessage);
+                let formErrors = $('#form-errors')
+                formErrors.text(errorMessage);
             });
         </script>
     </body>

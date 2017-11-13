@@ -36,7 +36,9 @@ search.on('connection', function (socket) {
                     eventName: 'lookup',
                     data: request
                 });
-                socket.emit('result', response);
+                for (user in usersToSocket) {
+                    usersToSocket[user].emit('response', response);
+                }
             } catch (e) {
                 socket.emit('request-fail', e.message);
             }

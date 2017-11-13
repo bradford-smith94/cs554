@@ -16,3 +16,17 @@ form > input {
 form > #submit {
     margin-top: 5px;
 }
+
+#form-errors {
+    color: maroon;
+    background: lightpink;
+}
+
+#results {
+    border: thin;
+}
+
+.message {
+    color: blue;
+    background: lightblue;
+}
