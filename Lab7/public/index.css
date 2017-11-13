@@ -6,15 +6,17 @@
 
 form > label {
     float: left;
-    width: 10em;
+    width: 8em;
+    margin-right: 0px;
 }
 
 form > input {
     display: block;
+    margin: 2px 0px;
 }
 
 form > #submit {
-    margin-top: 5px;
+    margin: 5px auto;
 }
 
 #form-errors {
@@ -23,10 +25,23 @@ form > #submit {
 }
 
 #results {
-    border: thin;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    background: lightyellow;
+    padding: 5px;
+}
+
+#results > img {
+    margin: 2px;
 }
 
 .message {
     color: blue;
     background: lightblue;
+    margin: 0px;
+}
+
+.user {
+    font-weight: bold;
 }

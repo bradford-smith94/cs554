@@ -44,6 +44,7 @@
                 name.prop('readonly', true);
                 search.val('');
                 message.val('');
+                search.focus();
                 return false;
             });
 
@@ -61,8 +62,12 @@
                 }
                 let newMsg = document.createElement('p');
                 newMsg.className = 'message';
-                let text = document.createTextNode(response.name + ' says: ' +
-                    response.message);
+                let userSpan = document.createElement('span');
+                let nameText = document.createTextNode(response.name);
+                userSpan.appendChild(nameText);
+                userSpan.className = 'user';
+                let text = document.createTextNode(' says: ' + response.message);
+                newMsg.appendChild(userSpan);
                 newMsg.appendChild(text);
                 resultsContainer.prepend(newMsg);
             });
@@ -73,6 +78,7 @@
                 formErrors.text(errorMessage);
                 name.prop('readonly', false);
                 name.val('');
+                name.focus();
             });
 
             socket.on('request-fail', function (errorMessage) {
