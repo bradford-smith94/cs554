@@ -5,6 +5,13 @@
 ## Node.js
 */node_modules/
 
+## LaTeX outputs
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+
 ## Lab specific stuff ##
 
 # gulp will generate public css and js files in Lab3
