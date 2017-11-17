@@ -18,17 +18,6 @@
 Lab3/public/css/
 Lab3/public/js/
 
-# lecture4 in class work
-lecture4-marvel/build/
-lecture4-marvel/coverage/
-lecture4-marvel/.env.local
-lecture4-marvel/.env.development.local
-lecture4-marvel/.env.test.local
-lecture4-marvel/.env.production.local
-lecture4-marvel/npm-debug.log*
-lecture4-marvel/yarn-debug.log*
-lecture4-marvel/yarn-error.log*
-
 # Lab4 react-app
 Lab4/build/
 Lab4/coverage/

@@ -1,9 +1,0 @@
-# see: http://editorconfig.org
-
-# specify that this is the top-most EditorConfig file
-root = true
-
-# rules for all files
-[*]
-indent_style = space
-indent_size = 2
