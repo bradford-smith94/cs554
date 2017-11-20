@@ -34,8 +34,21 @@
     to see their log entries? What would be your web server?
 \end{quote}
 
-Answer %TODO
+I would store log entries in a database, probably MongoDB, in order to
+facilitate easy lookups. Users would be able to submit log entries through a
+form. This form would have required fields such as time/date, the program
+sending or generating the log entry and a log message. To allow for custom
+fields users would be able to click a `plus' button that would add a custom
+field, essentially just two text inputs for entering a lookup key and a value.
+For the custom fields the keys would have to be unique in order for the form to
+validate. In order to query log entries users would be presented with a search
+box for the query string and a set of radio buttons to select the key to search
+against. If the `custom key' radio button is selected a hidden text input should
+appear allowing the user to specify the custom key. Additionally a paginated
+view of log entries would be available for the users. For this I would probably
+choose Node as my web server because I have the most experience with it.
 
+\pagebreak{}
 \section*{Scenario 2: Expense Reports}
 
 \begin{quote}
@@ -54,8 +67,19 @@ Answer %TODO
     you going to handle all the templating for the web application?
 \end{quote}
 
-Answer %TODO
+I would store the expenses in a database, again probably MongoDB\@. I would
+choose Node as my webserver because I have the most experience with it and it
+pairs well with MongoDB\@. After searching for a Node module to handle emails I
+found that Nodemailer seems to work well, so I would try to use that for sending
+emails. I would choose \LaTeX{} for generating PDFs because I already use it for
+most of my work, it should be easy to setup an `expense report' class to be
+easily filled in with data from an HTML form if there doesn't already exist a
+class that will fit the needs. \LaTeX{} will handle any templating needed for
+the PDF files, as for templating on the web application itself I would probably
+use EJS mostly because it is pretty simple and the only one I can think of off
+the top of my head.
 
+\pagebreak{}
 \section*{Scenario 3: A Twitter Streaming Safety Service}
 
 \begin{quote}
@@ -92,8 +116,19 @@ Answer %TODO
     that you have to store as well? What web server technology would you use?
 \end{quote}
 
-Answer %TODO
+%TODO Twitter API, expandable
+In order to make sure the system is constantly stable I would try to use
+technologies and services with support available. For my web server I would use
+\@.NET Core on Windows IIS solely for the fact that the departments will have a
+support staff to go to with issues about their web server. For databases I would
+probably choose redis for the triggers because of it's speed, but MySQL for the
+historical log because of it's stability and common use. For a real time
+streaming incident report I would opt for a websocket client that subscribes to
+events corresponding to new Tweet. The media archive I would try to store with
+Microsoft, probably OneDrive or whatever an enterprise equivalent would be,
+again chosen for the support staff and stability.
 
+\pagebreak{}
 \section*{Scenario 4: A Mildly Interesting Mobile Application}
 
 \begin{quote}
@@ -111,7 +146,11 @@ Answer %TODO
     retrieval? What would you write your API in? What would be your database?
 \end{quote}
 
-Answer %TODO
+%TODO geospatial
+Images could be stored for the long term using a cloud storage platform such as
+AWS S3, OneDrive, Google Drive or Dropbox. For the short term commonly searched
+or used images could be saved in a cache, such as redis, for quick retrieval. I
+would probably write my API in NodeJS and use MongoDB as my database.
 
 \end{document}
 
