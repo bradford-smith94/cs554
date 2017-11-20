@@ -1,10 +1,14 @@
 % Bradford Smith
 % bsmith8_cs554-lab8.tex
-% 11/16/2017
+% 11/19/2017
 %===============
 
 % global document styles =======================================================
 \documentclass[12pt, letterpaper]{homework}
+
+\usepackage{color}
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\small\color{gray}}
 
 \author{Bradford Smith}
 \assignment{CS 554 Lab 8}
@@ -17,11 +21,97 @@
 
 \section*{Scenario 1: Logging}
 
+\begin{quote}
+    In this scenario, you are tasked with creating a logging server for any number
+    of other arbitrary pieces of technologies.
+
+    Your logs should have some common fields, but support any number of
+    customizeable fields for an individual log entry. You should be able to
+    effectively query them based on any of these fields.
+
+    How would you store your log entries? How would you allow users to submit log
+    entries? How would you allow them to query log entries? How would you allow them
+    to see their log entries? What would be your web server?
+\end{quote}
+
+Answer %TODO
+
 \section*{Scenario 2: Expense Reports}
+
+\begin{quote}
+    In this scenario, you are tasked with making an expense reporting web
+    application.
+
+    Users should be able to submit expenses, which are always of the same data
+    structure: \code{id}, \code{user}, \code{isReimbursed}, \code{reimbursedBy},
+    \code{paidOn}, and \code{amount}.
+
+    When an expense is reimbursed you will generate a PDF and email it to the user
+    who submitted the expense.
+
+    How would you store your expenses? What web server would you choose, and why?
+    How would you handle the emails? How would you handle PDF generation? How are
+    you going to handle all the templating for the web application?
+\end{quote}
+
+Answer %TODO
 
 \section*{Scenario 3: A Twitter Streaming Safety Service}
 
+\begin{quote}
+    In this scenario, you are tasked with creating a service for you local Police
+    Department that keeps track of Tweets within your area and scans for keywords to
+    trigger an investigation.
+
+    This application comes with several parts:
+    \begin{itemize}
+        \item An online website to CRUD combinations of keywords to add to your
+            trigger. For example, it would alert when a Tweet contains the words
+            (\code{fight} or \code{drugs}) AND (\code{SmallTown USA HS} or
+            \code{SMUHS}).
+        \item An email alerting system to alert different officers depending on the
+            contents of the Tweet, who Tweeted it, etc.
+        \item A text alert system to inform officers for critical triggers (triggers
+            that meet a combination that is marked as extremely important to note).
+        \item A historical database to view possible incidents (Tweets that
+            triggered an alert) and to mark its investigation status.
+        \item A historical log of \textit{all} Tweets to retroactively search
+            through.
+        \item A streaming, online incident report. This would allow you to see
+            Tweets as they are parsed and see their threat level. This updates in
+            real time.
+        \item A long term storage of all the media used by any Tweets in your area
+            (pictures, snapshots of the URL, etc).
+    \end{itemize}
+
+    Which Twitter API do you use? How would you build this so its expandable to
+    beyond your local precinct? What would you do to make sure that this system is
+    constantly stable? What would be you web server technology? What databases would
+    you use for triggers? For the historical log of Tweets? How would you handle the
+    real time, streaming incident report? How would you handle storing all the media
+    that you have to store as well? What web server technology would you use?
+\end{quote}
+
+Answer %TODO
+
 \section*{Scenario 4: A Mildly Interesting Mobile Application}
+
+\begin{quote}
+    In this scenario, you are tasked with creating the web server side for a mobile
+    application where people take pictures of mildly interesting things and upload
+    them. The mobile application allows users to see mildly interesting pictures in
+    their geographical location.
+
+    Users must have an account to use this service. Your backend will effectively
+    amount to an API and a storage solution for CRUD users, CRUD `interesting
+    events', as well as an administrative dashboard for managing content.
+
+    How would you handle the geospatial nature of your data? How would you store the
+    images, both for the long term, cheap storage and for short term, fast
+    retrieval? What would you write your API in? What would be your database?
+\end{quote}
+
+Answer %TODO
 
 \end{document}
 
