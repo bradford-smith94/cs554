@@ -1,6 +1,6 @@
 % Bradford Smith
 % bsmith8_cs554-lab8.tex
-% 11/19/2017
+% 11/20/2017
 %===============
 
 % global document styles =======================================================
@@ -116,8 +116,11 @@ the top of my head.
     that you have to store as well? What web server technology would you use?
 \end{quote}
 
-%TODO Twitter API, expandable
-In order to make sure the system is constantly stable I would try to use
+I would use the Twitter Search API in order to pull in recent Tweets. To make
+sure the application is expandable I would keep the server generalized so that
+other towns or departments will be able to use it easily. By relying as much as
+possible on other services like cloud storage expandability is made easier. In
+order to make sure the system is constantly stable I would try to use
 technologies and services with support available. For my web server I would use
 \@.NET Core on Windows IIS solely for the fact that the departments will have a
 support staff to go to with issues about their web server. For databases I would
@@ -146,11 +149,14 @@ again chosen for the support staff and stability.
     retrieval? What would you write your API in? What would be your database?
 \end{quote}
 
-%TODO geospatial
-Images could be stored for the long term using a cloud storage platform such as
-AWS S3, OneDrive, Google Drive or Dropbox. For the short term commonly searched
-or used images could be saved in a cache, such as redis, for quick retrieval. I
-would probably write my API in NodeJS and use MongoDB as my database.
+Because of the geospatial nature of the data I would try to cache items near a
+user's location or last searched location to improve search response times. I
+would also try to sort the data by location as best as possible rather than
+alphabetically or by time or other identifier. Images could be stored for the
+long term using a cloud storage platform such as AWS S3, OneDrive, Google Drive
+or Dropbox. For the short term commonly searched or used images could be saved
+in a cache, such as redis, for quick retrieval. I would probably write my API in
+NodeJS and use MongoDB as my database.
 
 \end{document}
 
